@@ -1,0 +1,137 @@
+/* Estilos generales */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #f0f0f0; /* Fondo gris claro */
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.App {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 90%;
+  max-width: 600px;
+  text-align: center; /* Centrar el texto dentro del contenedor principal */
+}
+
+/* Botón "Pedir Comida" */
+.toggleButton {
+  background-color: #e0e0e0; /* Gris claro */
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Título principal */
+.title {
+  font-size: 1.6rem;
+  color: #333; /* Texto más oscuro */
+  margin-bottom: 10px;
+}
+
+/* Subtítulo "Menús" */
+.subTitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Lista de menús */
+.ulApp {
+  list-style: none;
+  padding: 0;
+  display: grid; /* Usamos grid para un diseño más flexible */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas responsive */
+  grid-gap: 20px; /* Espacio entre las tarjetas */
+}
+
+/* Elementos de la lista (tarjetas) */
+.liApp {
+  background-color: #fff; /* Fondo blanco para las tarjetas */
+  border: 1px solid #ddd; /* Borde gris claro */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: left; /* Alinea el texto a la izquierda dentro de la tarjeta */
+  min-height: 80px; /* Altura minima para que todas las tarjetas tengan el mismo tamaño */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
+}
+
+.liApp p {
+  margin: 5px 0; /* Espacio entre los párrafos dentro de la tarjeta */
+}
+
+/* Estilo para el precio */
+.liApp p:last-child {
+  color: #4CAF50; /* Verde */
+}
+
+.nav-menu {
+  list-style: none; /* Elimina los puntos de la lista */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Para alinear los elementos horizontalmente */
+}
+
+.nav-menu li {
+  margin-left: 1rem; /* Espacio entre los elementos de la lista */
+}
+
+.nav-menu a {
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: #333; /* Color del texto */
+  font-weight: 500; /* Peso de la fuente */
+  padding: 0.5rem 1rem; /* Espacio interno alrededor del texto del enlace */
+  border-radius: 4px; /* Bordes redondeados */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.nav-menu a:hover {
+  background-color: #ddd; /* Color de fondo al pasar el ratón */
+  color: #007bff; /* Color del texto al pasar el ratón (azul de Bootstrap) */
+}
+
+.nav-menu button {
+  background-color: #007bff; /* Color de fondo del botón (azul de Bootstrap) */
+  color: white; /* Color del texto del botón */
+  border: none; /* Elimina los bordes del botón */
+  padding: 0.5rem 1rem; /* Espacio interno alrededor del texto del botón */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.nav-menu button:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el ratón (azul más oscuro) */
+}
+
+
+.app-layout {
+  display: flex; /* Enable Flexbox for the main layout */
+  min-height: 100vh; /* Ensure it takes at least the full viewport height */
+}
+
+.navbar {
+  /* Keep your existing navbar styles */
+  background-color: #f0f0f0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: auto; /* Adjust as needed, or let content determine width */
+}
+
+.main-content {
+  padding: 2rem;
+  flex-grow: 1; /* Allow the main content to take up remaining horizontal space */
+  background-color: #f9f9f9; /* Optional: Background color for the content area */
+}

@@ -1,0 +1,97 @@
+.playlist-selection-container, .playlist-details-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.selection-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e5e7eb;
+}
+
+.selection-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.last-update {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.songs-table {
+    background: #1f2937; /* Dark background like Grafana */
+    color: #f3f4f6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    background: #374151;
+    padding: 1rem;
+    font-weight: 600;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    padding: 1rem;
+    border-bottom: 1px solid #374151;
+    align-items: center;
+}
+
+.table-row:hover {
+    background: #2d3748;
+}
+
+.song-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-name span {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.delta {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 600;
+}
+
+.delta.positive { color: #10b981; }
+.delta.negative { color: #ef4444; }
+.delta.neutral { color: #9ca3af; }
+
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
