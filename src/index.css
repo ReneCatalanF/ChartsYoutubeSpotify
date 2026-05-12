@@ -1,114 +1,125 @@
 @import "tailwindcss";
 
 :root {
-  --bts-purple: #7c3aed;
-  --bts-purple-light: #a78bfa;
-  --bts-dark-bg: #0f172a;
-  --bts-card-bg: #1e293b;
-  --bts-text-primary: #f8fafc;
-  --bts-text-secondary: #94a3b8;
-  --bts-accent: #c084fc;
+  --bts-purple: #8b5cf6;
+  --bts-purple-light: #c4b5fd;
+  --bts-dark-bg: #030712;
+  --bts-card-bg: #111827;
+  --bts-text-primary: #ffffff;
+  --bts-text-secondary: #cbd5e1; /* Gris más claro y sólido para mejor lectura */
+  --bts-accent: #e879f9;
 }
 
 body {
   margin: 0;
   background-color: var(--bts-dark-bg);
   color: var(--bts-text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  /* Eliminamos gradientes que puedan ensuciar el texto */
 }
 
-/* Fix for all buttons that look like plain text */
+/* Forzar fondos oscuros en toda la app */
+#root, .main-content {
+  background-color: var(--bts-dark-bg);
+}
+
+/* Mejora de visibilidad de textos */
+h1, h2, h3, strong {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+p, span, div {
+  color: var(--bts-text-secondary);
+}
+
+/* Botones con colores más sólidos */
 button, .confirm-btn, .add-btn, .manage-songs-btn, .save-song-btn, .back-btn, .refresh-btn {
-  padding: 0.6rem 1.2rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.025em;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  background: rgba(124, 58, 237, 0.1);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  border: none;
+  background: var(--bts-purple) !important;
   color: white !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
-  background: var(--bts-purple);
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
-  transform: translateY(-1px);
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
 }
 
-/* Modals Fix */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 1rem;
-}
-
-.modal {
-  background: var(--bts-card-bg) !important;
-  border: 1px solid rgba(167, 139, 250, 0.3) !important;
-  border-radius: 1.5rem !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8) !important;
-  max-width: 600px;
-  width: 100%;
-  padding: 2.5rem !important;
-}
-
-.modal.large {
-  max-width: 900px;
-  max-height: 85vh;
-}
-
-/* Inputs contrast fix */
+/* Inputs con alto contraste */
 input, select {
   width: 100%;
-  background: #0f172a !important;
-  border: 1px solid #334155 !important;
-  color: white !important;
-  padding: 0.8rem 1rem !important;
+  background: #1f2937 !important;
+  border: 2px solid #374151 !important;
+  color: #ffffff !important;
+  padding: 1rem !important;
   border-radius: 0.75rem !important;
-  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+input::placeholder {
+  color: #94a3b8;
 }
 
 label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: var(--bts-purple-light);
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
 }
 
-/* Cards visibility */
-.playlist-card, .user-item, .selection-card {
-  background: rgba(30, 41, 59, 0.5) !important;
-  border: 1px solid rgba(51, 65, 85, 1) !important;
+/* Modales */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
-.playlist-card h3, .user-info strong {
-  color: white !important;
-  font-weight: 800 !important;
+.modal {
+  background: var(--bts-card-bg) !important;
+  border: 2px solid var(--bts-purple) !important;
+  border-radius: 1.5rem !important;
+  padding: 3rem !important;
 }
 
-.playlist-card p, .user-info span {
-  color: #94a3b8 !important;
+/* Tablas y Listas */
+.table-header {
+  background: #1f2937 !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
 }
 
+.table-row {
+  border-bottom: 1px solid #374151 !important;
+}
+
+.song-name strong {
+  color: #ffffff !important;
+  font-size: 1.25rem !important;
+}
+
+/* Animaciones */
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-15px); }
 }
 
 .animate-bounce-slow {
