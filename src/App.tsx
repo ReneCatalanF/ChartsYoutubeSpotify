@@ -45,12 +45,11 @@ const App: React.FC = () => {
           // Si el usuario no existe en la DB (pero sí en Auth), lo creamos proactivamente
           if (!userData) {
             console.log("Creando perfil de usuario faltante en DB...");
-            const isAdmin = firebaseUser.email === 'reene.ddyyfmen@gmail.com';
             userData = {
               uid: firebaseUser.uid,
               email: firebaseUser.email || '',
               name: firebaseUser.email?.split('@')[0] || 'Usuario',
-              role: isAdmin ? 'admin' : 'user',
+              role: 'user', // Por defecto todos son user, el admin lo asignará manualmente
               accessiblePlaylists: []
             };
             await firebaseDbService.saveUser(userData);

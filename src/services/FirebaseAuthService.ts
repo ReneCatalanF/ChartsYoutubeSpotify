@@ -16,15 +16,12 @@ export class FirebaseAuthService {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const { user } = userCredential;
 
-        // Al registrarse, creamos el perfil en Realtime Database
-        // Si es el email del dueño, le damos ADMIN
-        const isAdmin = user.email === 'reene.ddyyfmen@gmail.com';
-        
+        // Al registrarse, creamos el perfil en Realtime Database con rol 'user' por defecto
         const newUser: AppUser = {
             uid: user.uid,
             email: user.email || '',
             name: user.email?.split('@')[0] || 'Usuario',
-            role: isAdmin ? 'admin' : 'user',
+            role: 'user', // Todos los nuevos registros son 'user'
             accessiblePlaylists: []
         };
 
