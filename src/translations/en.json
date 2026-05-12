@@ -24,6 +24,13 @@
     "song.header.likes": "Likes",
     "song.header.delta": "Difference",
     "login.title": "Tracker Access",
+    "login.placeholder.email": "Email address",
+    "login.placeholder.password": "Password",
+    "login.button.login": "Login",
     "register.title": "User Registration",
+    "register.placeholder.email": "Email address",
+    "register.placeholder.password": "Password",
+    "register.button.register": "Register",
+    "register.successMessage": "Registration successful. Redirecting...",
     "welcome.message": "Welcome to the List Tracker. Login to continue."
 }

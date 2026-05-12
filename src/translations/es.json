@@ -24,6 +24,13 @@
     "song.header.likes": "Likes",
     "song.header.delta": "Diferencia",
     "login.title": "Acceso al Rastreador",
+    "login.placeholder.email": "Correo electrónico",
+    "login.placeholder.password": "Contraseña",
+    "login.button.login": "Login",
     "register.title": "Registro de Usuario",
+    "register.placeholder.email": "Correo electrónico",
+    "register.placeholder.password": "Contraseña",
+    "register.button.register": "Registrarse",
+    "register.successMessage": "Registro exitoso. Redirigiendo...",
     "welcome.message": "Bienvenido al Rastreador de Listas. Inicia sesión para continuar."
 }
