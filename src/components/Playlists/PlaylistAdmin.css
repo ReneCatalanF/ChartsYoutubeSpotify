@@ -1,72 +1,81 @@
 .playlist-admin-container {
-    padding: 2rem;
-    max-width: 1200px;
+    padding: 3rem;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
-.header h1 {
-    font-size: 2.5rem;
-    font-weight: 900;
-    background: linear-gradient(to right, #a78bfa, #d8b4fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 0;
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
 }
 
 .playlist-card {
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(167, 139, 250, 0.2);
-    border-radius: 1.25rem;
-    padding: 1.5rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.playlist-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(167, 139, 250, 0.5);
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
-.card-actions button {
-    padding: 0.6rem;
-    border-radius: 0.75rem;
-    background: #334155;
+.card-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
     color: white;
-    border: 1px solid #475569;
 }
 
-.manage-songs-btn {
-    background: rgba(109, 40, 217, 0.1) !important;
-    border-color: rgba(109, 40, 217, 0.4) !important;
-    color: #ddd6fe !important;
+.author-text {
+    color: var(--bts-text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
 }
 
-.manage-songs-btn:hover {
-    background: rgba(109, 40, 217, 0.3) !important;
+.songs-count {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--bts-purple-light);
+    background: rgba(167, 139, 250, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+    width: fit-content;
+    margin-bottom: 1.5rem;
 }
 
-.delete-btn {
-    background: rgba(239, 68, 68, 0.1) !important;
-    border-color: rgba(239, 68, 68, 0.3) !important;
-    color: #fca5a5 !important;
+.card-actions-row {
+    display: flex;
+    gap: 0.75rem;
 }
 
-.delete-btn:hover {
-    background: rgba(239, 68, 68, 0.2) !important;
+.card-actions-row button {
+    flex: 1;
 }
 
-.modal {
-    border-radius: 1.5rem !important;
+.edit-icon-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--bts-purple-light) !important;
+    padding: 0.5rem !important;
 }
 
-.song-item {
-    background: rgba(15, 23, 42, 0.5) !important;
-    border: 1px solid #334155;
+.edit-icon-btn:hover {
+    color: white !important;
+    background: rgba(167, 139, 250, 0.2) !important;
 }
 
-.add-song-form {
-    background: rgba(71, 85, 105, 0.2);
-    padding: 1rem;
-    border-radius: 1rem;
-    margin-bottom: 2rem;
+.song-admin-item:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
+
+.edit-action-btn, .delete-action-btn {
+    padding: 0.5rem !important;
+    min-width: 40px;
+    background: transparent !important;
+}
+
+.edit-action-btn { color: #60a5fa !important; }
+.delete-action-btn { color: #f87171 !important; }

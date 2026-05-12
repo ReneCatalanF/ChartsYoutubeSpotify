@@ -135,7 +135,7 @@ const PlaylistAdmin: React.FC = () => {
             id: song.id, 
             name: song.name, 
             author: song.author || '', 
-            url: song.youtubeId // Pasamos el ID que también es aceptado por el extractor
+            url: song.youtubeId 
         });
         setIsEditingSong(true);
     };
@@ -152,13 +152,13 @@ const PlaylistAdmin: React.FC = () => {
         }
     };
 
-    if (loading) return <div className="p-8 text-center">Cargando gestión de listas...</div>;
+    if (loading) return <div className="p-12 text-center text-bts-purple-light text-xl">Cargando gestión de listas...</div>;
 
     return (
         <div className="playlist-admin-container">
-            <div className="header">
-                <h1>Panel de Control de Listas</h1>
-                <button className="add-btn" onClick={() => { 
+            <div className="header flex justify-between items-center mb-10">
+                <h1>Panel de Control</h1>
+                <button className="add-btn confirm-btn" onClick={() => { 
                     setListForm({ id: '', name: '', author: '' }); 
                     setIsEditingList(false); 
                     setIsListModalOpen(true); 
@@ -176,11 +176,11 @@ const PlaylistAdmin: React.FC = () => {
                                 <FaEdit />
                             </button>
                         </div>
-                        <p>{list.author || 'Sin autor'}</p>
-                        <div className="stats-info">
-                            <span>Canciones: {list.songs?.length || 0}/10</span>
+                        <p className="author-text">{list.author || 'Sin autor'}</p>
+                        <div className="songs-count">
+                            {list.songs?.length || 0} / 10 canciones
                         </div>
-                        <div className="card-actions">
+                        <div className="card-actions-row">
                             <button className="manage-songs-btn" onClick={() => { setSelectedPlaylist(list); setIsSongModalOpen(true); }}>
                                 <FaMusic /> Gestionar Canciones
                             </button>
@@ -197,18 +197,24 @@ const PlaylistAdmin: React.FC = () => {
                 <div className="modal-overlay">
                     <div className="modal">
                         <h2>{isEditingList ? 'Editar Lista' : 'Nueva Lista'}</h2>
-                        <input 
-                            placeholder="Nombre de la lista" 
-                            value={listForm.name}
-                            onChange={e => setListForm({...listForm, name: e.target.value})}
-                        />
-                        <input 
-                            placeholder="Autor (opcional)" 
-                            value={listForm.author}
-                            onChange={e => setListForm({...listForm, author: e.target.value})}
-                        />
-                        <div className="modal-footer">
-                            <button onClick={() => setIsListModalOpen(false)}>Cancelar</button>
+                        <div className="form-group">
+                            <label>Nombre de la lista</label>
+                            <input 
+                                placeholder="Ej: Top 10 Billboard" 
+                                value={listForm.name}
+                                onChange={e => setListForm({...listForm, name: e.target.value})}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Autor / Descripción</label>
+                            <input 
+                                placeholder="Nombre del autor" 
+                                value={listForm.author}
+                                onChange={e => setListForm({...listForm, author: e.target.value})}
+                            />
+                        </div>
+                        <div className="modal-footer flex gap-4 justify-end mt-4">
+                            <button className="cancel-btn" onClick={() => setIsListModalOpen(false)}>Cancelar</button>
                             <button className="confirm-btn" onClick={handleSavePlaylist}>
                                 {isEditingList ? 'Guardar Cambios' : 'Crear Lista'}
                             </button>
@@ -221,54 +227,69 @@ const PlaylistAdmin: React.FC = () => {
             {isSongModalOpen && selectedPlaylist && (
                 <div className="modal-overlay">
                     <div className="modal large">
-                        <div className="modal-header">
-                            <h2>Canciones de: {selectedPlaylist.name}</h2>
+                        <div className="modal-header flex justify-between items-center mb-6">
+                            <h2>Canciones: {selectedPlaylist.name}</h2>
                             <button className="close-x" onClick={() => { setIsSongModalOpen(false); setIsEditingSong(false); }}>
                                 <FaTimes />
                             </button>
                         </div>
                         
-                        <div className="add-song-form">
-                            <input 
-                                placeholder="Nombre canción" 
-                                value={songForm.name}
-                                onChange={e => setSongForm({...songForm, name: e.target.value})}
-                            />
-                            <input 
-                                placeholder="YouTube URL o ID" 
-                                value={songForm.url}
-                                onChange={e => setSongForm({...songForm, url: e.target.value})}
-                            />
-                            <button className="save-song-btn" onClick={handleSaveSong}>
-                                {isEditingSong ? <><FaSave /> Guardar</> : <><FaPlus /> Añadir</>}
-                            </button>
-                            {isEditingSong && (
-                                <button className="cancel-edit-btn" onClick={() => {
-                                    setSongForm({ id: '', name: '', author: '', url: '' });
-                                    setIsEditingSong(false);
-                                }}>
-                                    Cancelar
+                        <div className="add-song-box p-6 bg-bts-black/40 rounded-xl mb-8 border border-white/5">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div className="form-group">
+                                    <label>Nombre de la canción</label>
+                                    <input 
+                                        placeholder="Ej: Dynamite" 
+                                        value={songForm.name}
+                                        onChange={e => setSongForm({...songForm, name: e.target.value})}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>YouTube URL o ID</label>
+                                    <input 
+                                        placeholder="URL del video o ID de 11 caracteres" 
+                                        value={songForm.url}
+                                        onChange={e => setSongForm({...songForm, url: e.target.value})}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex gap-3">
+                                <button className="save-song-btn confirm-btn" onClick={handleSaveSong}>
+                                    {isEditingSong ? <><FaSave /> Guardar Cambios</> : <><FaPlus /> Añadir Canción</>}
                                 </button>
-                            )}
+                                {isEditingSong && (
+                                    <button className="cancel-edit-btn" onClick={() => {
+                                        setSongForm({ id: '', name: '', author: '', url: '' });
+                                        setIsEditingSong(false);
+                                    }}>
+                                        Cancelar Edición
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
-                        <div className="song-list">
+                        <div className="song-management-list max-h-[400px] overflow-y-auto pr-2">
                             {selectedPlaylist.songs?.map(song => (
-                                <div key={song.id} className="song-item">
-                                    <div className="song-info">
-                                        <strong>{song.name}</strong>
-                                        <span>{song.youtubeId}</span>
+                                <div key={song.id} className="song-admin-item flex justify-between items-center p-4 bg-white/5 rounded-lg mb-2 border border-white/5">
+                                    <div className="song-meta">
+                                        <div className="font-bold text-white text-lg">{song.name}</div>
+                                        <div className="text-bts-text-secondary text-sm">ID: {song.youtubeId}</div>
                                     </div>
-                                    <div className="song-item-actions">
-                                        <button className="edit-btn" onClick={() => handleEditSong(song)}>
+                                    <div className="flex gap-2">
+                                        <button className="edit-action-btn" onClick={() => handleEditSong(song)}>
                                             <FaEdit />
                                         </button>
-                                        <button className="delete-btn" onClick={() => handleDeleteSong(song.id)}>
+                                        <button className="delete-action-btn text-red-400" onClick={() => handleDeleteSong(song.id)}>
                                             <FaTrash />
                                         </button>
                                     </div>
                                 </div>
                             ))}
+                            {(!selectedPlaylist.songs || selectedPlaylist.songs.length === 0) && (
+                                <div className="text-center py-8 text-bts-text-secondary italic">
+                                    No hay canciones en esta lista. Añade la primera arriba.
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

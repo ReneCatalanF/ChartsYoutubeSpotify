@@ -1,76 +1,116 @@
 @import "tailwindcss";
 
 :root {
-  --bts-purple: #6d28d9;
+  --bts-purple: #7c3aed;
   --bts-purple-light: #a78bfa;
-  --bts-dark: #1e1b4b;
-  --bts-black: #0f172a;
-  --bts-white: #f8fafc;
-  --bts-accent: #d8b4fe;
+  --bts-dark-bg: #0f172a;
+  --bts-card-bg: #1e293b;
+  --bts-text-primary: #f8fafc;
+  --bts-text-secondary: #94a3b8;
+  --bts-accent: #c084fc;
 }
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bts-black);
-  color: var(--bts-white);
-  background-image: radial-gradient(circle at top right, #312e81, transparent),
-                    radial-gradient(circle at bottom left, #1e1b4b, transparent);
-  background-attachment: fixed;
+  background-color: var(--bts-dark-bg);
+  color: var(--bts-text-primary);
+  font-family: 'Inter', sans-serif;
   min-height: 100vh;
 }
 
-/* Global Button Styling */
-button {
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  border: none;
-  font-weight: 600;
+/* Fix for all buttons that look like plain text */
+button, .confirm-btn, .add-btn, .manage-songs-btn, .save-song-btn, .back-btn, .refresh-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  background: rgba(124, 58, 237, 0.1);
+  color: white !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
-button:active {
-  transform: scale(0.95);
+button:hover {
+  background: var(--bts-purple);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+  transform: translateY(-1px);
 }
 
-.confirm-btn, .add-btn, .save-song-btn {
-  background: linear-gradient(135deg, var(--bts-purple), #4f46e5) !important;
-  color: white !important;
-  box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
-}
-
-.confirm-btn:hover, .add-btn:hover, .save-song-btn:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.4);
-}
-
-input, select {
-  background-color: #1e293b !important;
-  border: 1px solid #334155 !important;
-  color: white !important;
-  transition: border-color 0.2s;
-}
-
-input:focus, select:focus {
-  border-color: var(--bts-purple-light) !important;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.2);
+/* Modals Fix */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
 }
 
 .modal {
-  background-color: #1e293b !important;
-  color: white !important;
-  border: 1px solid #334155;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  background: var(--bts-card-bg) !important;
+  border: 1px solid rgba(167, 139, 250, 0.3) !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8) !important;
+  max-width: 600px;
+  width: 100%;
+  padding: 2.5rem !important;
 }
 
-.modal h2 {
-  color: var(--bts-accent);
+.modal.large {
+  max-width: 900px;
+  max-height: 85vh;
+}
+
+/* Inputs contrast fix */
+input, select {
+  width: 100%;
+  background: #0f172a !important;
+  border: 1px solid #334155 !important;
+  color: white !important;
+  padding: 0.8rem 1rem !important;
+  border-radius: 0.75rem !important;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--bts-purple-light);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Cards visibility */
+.playlist-card, .user-item, .selection-card {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border: 1px solid rgba(51, 65, 85, 1) !important;
+  backdrop-filter: blur(10px);
+}
+
+.playlist-card h3, .user-info strong {
+  color: white !important;
+  font-weight: 800 !important;
+}
+
+.playlist-card p, .user-info span {
+  color: #94a3b8 !important;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
 }
