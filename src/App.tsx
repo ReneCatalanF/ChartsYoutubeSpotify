@@ -16,7 +16,7 @@ import UserAccessManager from './components/Playlists/UserAccessManager';
 // Importaciones de Redux
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { auth } from './services/FirebaseStorage';
-import { setUser, setLoading, setError, fetchUserData } from './store/slices/authSlice';
+import { setUser, setLoading, setError } from './store/slices/authSlice';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseDbService } from './services/FirebaseDatabaseService';
 

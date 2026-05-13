@@ -3,45 +3,46 @@ import React, {
     ReactNode
 } from 'react';
 import { authService } from '../services/AuthServide';
+import { firebaseDbService } from '../services/FirebaseDatabaseService';
 import { Role } from '../services/IAuthService';
 
 
 interface AuthContextProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     user: any | null;
-    roles: Role[] | null;
+    role: Role | null;
 }
 export const AuthContext =
     createContext<AuthContextProps>({
         user: null,
-        roles: null
+        role: null
     });
 interface AuthProviderProps {
     children: ReactNode;
 }
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<unknown | null>(null);
-    const [roles, setRoles] = useState<Role[] | null>(null);
+    const [role, setRole] = useState<Role | null>(null);
     useEffect(() => {
         const unsubscribe = authService.onAuthStateChanged(async (currentUser) => {
             setUser(currentUser);
             if (currentUser) {
                 try {
-                    const userRoles = await authService.getUserRoles(currentUser);
-                    setRoles(userRoles);
+                    const userData = await firebaseDbService.getUserData(currentUser.uid);
+                    setRole(userData?.role || 'user');
                 } catch (error) {
-                    console.error('Error al obtener los roles:', error);
-                    setRoles(null);
+                    console.error('Error al obtener los datos del usuario:', error);
+                    setRole('user');
                 }
             }
             else {
-                setRoles(null);
+                setRole(null);
             }
         });
         return unsubscribe;
     }, []);
     return (
-        <AuthContext.Provider value={{ user, roles }}>
+        <AuthContext.Provider value={{ user, role }}>
             {children}
         </AuthContext.Provider>
     );
