@@ -26,12 +26,13 @@
     background: rgba(15, 23, 42, 0.8);
     border-radius: 1.5rem;
     border: 1px solid rgba(167, 139, 250, 0.2);
-    overflow: hidden;
+    overflow-x: auto; /* Permite scroll horizontal si es necesario */
 }
 
 .table-header {
     display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2.2fr 1fr 1.1fr 1fr 1.1fr;
+    min-width: 800px; /* Asegura un ancho mínimo para que no se amontone */
     background: rgba(124, 58, 237, 0.15);
     padding: 1.5rem;
     font-weight: 800;
@@ -41,7 +42,8 @@
 
 .table-row {
     display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2.2fr 1fr 1.1fr 1fr 1.1fr;
+    min-width: 800px; /* Mismo min-width que el header */
     padding: 1.5rem;
     border-bottom: 1px solid rgba(51, 65, 85, 0.5);
     align-items: center;
@@ -69,10 +71,14 @@
 }
 
 .delta {
+    display: flex; /* Cambiado a flex para alinear icono y texto */
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
     font-size: 0.9rem;
     width: fit-content;
+    white-space: nowrap; /* Evita que el número se baje a otra línea */
 }
 
 .delta.positive {

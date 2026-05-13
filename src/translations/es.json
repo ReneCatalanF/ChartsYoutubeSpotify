@@ -18,7 +18,6 @@
     "playlist.createModal.fieldName": "Nombre de la Lista",
     "playlist.createModal.fieldAuthor": "Autor (Opcional)",
     "playlist.createModal.addButton": "Crear Lista",
-    "playlist.songLimitAlert": "Máximo 10 canciones por lista.",
     "song.header.name": "Canción",
     "song.header.views": "Reproducciones",
     "song.header.likes": "Likes",

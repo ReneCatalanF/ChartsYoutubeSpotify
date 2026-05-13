@@ -77,8 +77,6 @@ export class FirebaseDatabaseService {
                     const newStats = await youtubeService.getVideoStats(song.youtubeId);
                     return {
                         ...song,
-                        previousViews: song.currentViews,
-                        previousLikes: song.currentLikes,
                         currentViews: newStats.viewCount,
                         currentLikes: newStats.likeCount
                     };
@@ -91,7 +89,11 @@ export class FirebaseDatabaseService {
                 lastUpdate: now.toISOString()
             };
 
-            await this.updatePlaylist(playlist.id, updatedPlaylist);
+            // Solo guardamos currentViews y currentLikes en DB
+            await this.updatePlaylist(playlist.id, {
+                songs: updatedSongs,
+                lastUpdate: updatedPlaylist.lastUpdate
+            });
             return updatedPlaylist;
         }
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Playlist, Song } from '../../entites/entities';
 import { firebaseDbService } from '../../services/FirebaseDatabaseService';
 import { youtubeService } from '../../services/YouTubeService';
-import { useIntl } from 'react-intl';
 import { FaTrash, FaPlus, FaMusic, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
 import './PlaylistAdmin.css';
 
@@ -22,8 +21,6 @@ const PlaylistAdmin: React.FC = () => {
     const [selectedPlaylist, setSelectedPlaylist] = useState<Playlist | null>(null);
     const [songForm, setSongForm] = useState({ id: '', name: '', author: '', url: '' });
     const [isEditingSong, setIsEditingSong] = useState(false);
-
-    const intl = useIntl();
 
     useEffect(() => {
         loadPlaylists();
@@ -103,19 +100,13 @@ const PlaylistAdmin: React.FC = () => {
                 youtubeId: youtubeId 
             } : s);
         } else {
-            if (updatedSongs.length >= 10) {
-                alert(intl.formatMessage({ id: 'playlist.songLimitAlert' }));
-                return;
-            }
             updatedSongs.push({
                 id: Date.now().toString(),
                 name: songForm.name,
                 author: songForm.author,
                 youtubeId: youtubeId,
                 currentViews: 0,
-                currentLikes: 0,
-                previousViews: 0,
-                previousLikes: 0
+                currentLikes: 0
             });
         }
 
@@ -178,7 +169,7 @@ const PlaylistAdmin: React.FC = () => {
                         </div>
                         <p className="author-text">{list.author || 'Sin autor'}</p>
                         <div className="songs-count">
-                            {list.songs?.length || 0} / 10 canciones
+                            {list.songs?.length || 0} canciones
                         </div>
                         <div className="card-actions-row">
                             <button className="manage-songs-btn" onClick={() => { setSelectedPlaylist(list); setIsSongModalOpen(true); }}>

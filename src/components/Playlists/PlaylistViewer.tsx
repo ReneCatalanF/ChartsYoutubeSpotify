@@ -13,12 +13,23 @@ const PlaylistViewer: React.FC = () => {
     
     const [myPlaylists, setMyPlaylists] = useState<Playlist[]>([]);
     const [viewMode, setViewMode] = useState<'selection' | 'details'>('selection');
+    
+    // Almacenamos el snapshot "previo" localmente para esta sesión
+    const [previousSnapshot, setPreviousSnapshot] = useState<Playlist | null>(null);
 
     useEffect(() => {
         if (user) {
             loadMyPlaylists();
         }
     }, [user]);
+
+    // Cuando cambia la lista seleccionada o termina de cargar, 
+    // si no teníamos snapshot previo, lo tomamos de la primera carga.
+    useEffect(() => {
+        if (selectedPlaylist && !previousSnapshot && !isLoading) {
+            setPreviousSnapshot(selectedPlaylist);
+        }
+    }, [selectedPlaylist, isLoading, previousSnapshot]);
 
     const loadMyPlaylists = async () => {
         if (!user) return;
@@ -34,18 +45,28 @@ const PlaylistViewer: React.FC = () => {
     };
 
     const handleSelectPlaylist = (id: string) => {
+        setPreviousSnapshot(null); // Reset snapshot al cambiar de lista
         dispatch(fetchPlaylistById({ id }));
         setViewMode('details');
     };
 
     const handleManualRefresh = () => {
         if (selectedPlaylist) {
+            // Antes de refrescar, el "actual" pasa a ser el "previo" local
+            setPreviousSnapshot(selectedPlaylist);
             dispatch(fetchPlaylistById({ id: selectedPlaylist.id, force: true }));
         }
     };
 
-    const renderDelta = (current: number, previous: number) => {
-        const delta = current - previous;
+    const renderDelta = (current: number, songId: string, type: 'views' | 'likes') => {
+        if (!previousSnapshot) return <span className="delta neutral"><FaMinus /> 0</span>;
+        
+        const previousSong = previousSnapshot.songs?.find(s => s.id === songId);
+        if (!previousSong) return <span className="delta neutral"><FaMinus /> 0</span>;
+
+        const previousValue = type === 'views' ? (previousSong.currentViews || 0) : (previousSong.currentLikes || 0);
+        const delta = current - previousValue;
+        
         if (delta > 0) return <span className="delta positive"><FaArrowUp /> {delta.toLocaleString()}</span>;
         if (delta < 0) return <span className="delta negative"><FaArrowDown /> {Math.abs(delta).toLocaleString()}</span>;
         return <span className="delta neutral"><FaMinus /> 0</span>;
@@ -55,7 +76,7 @@ const PlaylistViewer: React.FC = () => {
         return (
             <div className="playlist-details-container">
                 <div className="details-header">
-                    <button className="back-btn" onClick={() => setViewMode('selection')}>
+                    <button className="back-btn" onClick={() => { setViewMode('selection'); setPreviousSnapshot(null); }}>
                         <FaChevronLeft /> Volver
                     </button>
                     <h2>{selectedPlaylist.name}</h2>
@@ -87,9 +108,9 @@ const PlaylistViewer: React.FC = () => {
                                 <span>{song.author}</span>
                             </div>
                             <div className="col">{(song.currentViews || 0).toLocaleString()}</div>
-                            <div className="col">{renderDelta(song.currentViews || 0, song.previousViews || 0)}</div>
+                            <div className="col">{renderDelta(song.currentViews || 0, song.id, 'views')}</div>
                             <div className="col">{(song.currentLikes || 0).toLocaleString()}</div>
-                            <div className="col">{renderDelta(song.currentLikes || 0, song.previousLikes || 0)}</div>
+                            <div className="col">{renderDelta(song.currentLikes || 0, song.id, 'likes')}</div>
                         </div>
                     ))}
                     {(!selectedPlaylist.songs || selectedPlaylist.songs.length === 0) && (

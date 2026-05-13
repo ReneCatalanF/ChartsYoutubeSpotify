@@ -5,8 +5,8 @@ export interface Song {
     youtubeId: string; // The ID extracted from the URL
     currentViews: number;
     currentLikes: number;
-    previousViews: number;
-    previousLikes: number;
+    previousViews?: number;
+    previousLikes?: number;
 }
 
 export interface Playlist {
