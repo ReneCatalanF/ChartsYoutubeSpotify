@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
                 <Link to="/" className="flex items-center gap-3">
                     <img src={hamburgLogo} alt="Logo" className="w-10 h-10 rounded-full border-2 border-bts-purple" />
                     <span className="text-2xl font-black tracking-tighter bg-gradient-to-r from-bts-purple-light to-bts-accent bg-clip-text text-transparent">
-                        TRACKER PRO
+                        ChartsBTS
                     </span>
                 </Link>
                 

@@ -92,6 +92,9 @@ const App: React.FC = () => {
             <Route path="*" element={<WelcomeComp />} />
           </Routes>
         </div>
+        <footer className="py-6 text-center text-bts-text-secondary/60 text-sm border-t border-bts-purple/10">
+          By Armys Beyond the system
+        </footer>
       </Router>
     </IntlProvider>
   );

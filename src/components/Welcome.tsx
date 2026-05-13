@@ -19,7 +19,7 @@ const Welcome: React.FC = () => {
             </div>
 
             <h1 className="text-6xl font-black mb-6 bg-gradient-to-r from-bts-purple-light via-bts-accent to-white bg-clip-text text-transparent tracking-tight">
-                TRACKER PRO
+                ChartsBTS
             </h1>
 
             <p className="text-xl text-bts-accent/80 max-w-2xl mb-12 leading-relaxed">
