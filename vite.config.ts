@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   // process requiere npm install -D @types/node
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    base: env.VITE_APP_BASE_URL || '/Charts/',
+    base: env.VITE_APP_BASE_URL || '/ChartsYoutubeSpotify/',
     build:{
       outDir:'docs',
     },
